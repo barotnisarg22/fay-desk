@@ -11,7 +11,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Electron](https://img.shields.io/badge/Electron-38.1.2-blue.svg)](https://www.electronjs.org/)
 
-中文 | [English](./README.md)
+简体中文 | [English](./README_EN.md)
 
 </div>
 
