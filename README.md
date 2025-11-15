@@ -39,6 +39,8 @@
 
 <img src="docs/images/features/avatar.jpg" alt="avatar" width="800">
 
+<img src="docs/images/features/avatar_2.jpg" alt="avatar_2" width="800">
+
 基于 Xmov 具身驱动技术，将数字人形象融入桌面体验。通过简单的配置即可接入服务，数字人根据对话内容实时生成相应的表情和口型，营造出真实的面对面交流体验。
 
 得益于 Xmov 的云端渲染能力，复杂的数字人渲染计算无需在本地进行，因此即使是配置较低的设备也能获得流畅、高清的数字人交互体验，无需担心本地硬件性能限制。
@@ -146,5 +148,5 @@ pnpm build:win
 
 ---
 
-**如果这个项目对你有帮助，请给一个 ⭐ Star ~**
+如果这个项目对你有帮助，请给一个 ⭐ Star~
 
