@@ -99,16 +99,21 @@ async function initialize(): Promise<void> {
 
   const isAutoStarted = isStartedFromLogin()
 
+  trayService.setMainWindowCreator(createMainWindow)
+
   if (!isAutoStarted) {
     const mainWindow = createMainWindow()
     mainWindowService.setMainWindow(mainWindow)
-  } else {
-    // 开机自启动模式，不自动显示主窗口
-    mainWindowService.clearMainWindow()
-  }
 
-  trayService.setMainWindowCreator(createMainWindow)
-  trayService.create()
+    // 等待主窗口完全加载后再注册系统托盘
+    mainWindow.once('ready-to-show', () => {
+      trayService.create()
+    })
+  } else {
+    // 开机自启动模式，不自动显示主窗口，直接注册托盘
+    mainWindowService.clearMainWindow()
+    trayService.create()
+  }
 
   globalShortcutService.registerAll()
 
