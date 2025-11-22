@@ -71,12 +71,10 @@ export function registerAvatarHandlers(): void {
 
   ipcMain.handle('avatar:saveConfig', async (_event, config: AvatarConfig) => {
     try {
-      if (!avatarConfigService.isValid(config)) {
-        return { success: false, error: '配置无效：请提供appId和appSecret' }
-      }
       const success = avatarConfigService.save(config)
       if (success) {
-        broadcastToAllWindows('avatar:config:updated', { config, hasValidConfig: true })
+        const hasValidConfig = avatarConfigService.isValid(config)
+        broadcastToAllWindows('avatar:config:updated', { config, hasValidConfig })
       }
       return { success, error: success ? null : '保存失败' }
     } catch (error: any) {

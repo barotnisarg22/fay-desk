@@ -13,10 +13,6 @@ const originalConfig = ref({
   appSecret: ''
 })
 
-const isConfigValid = computed(() => {
-  return config.value.appId.trim() !== '' && config.value.appSecret.trim() !== ''
-})
-
 const isConfigModified = computed(() => {
   return JSON.stringify(config.value) !== JSON.stringify(originalConfig.value)
 })
@@ -34,15 +30,6 @@ const handleLoadConfig = async (): Promise<void> => {
 }
 
 const handleSaveConfig = async (): Promise<void> => {
-  if (!isConfigValid.value) {
-    ElNotification({
-      type: 'warning',
-      customClass: 'warn',
-      title: '请填写完整的配置信息'
-    })
-    return
-  }
-
   try {
     const result = await window.api.avatar.saveConfig({
       appId: config.value.appId,
@@ -103,11 +90,7 @@ onMounted(async () => {
       </el-form>
 
       <div class="actions">
-        <el-button
-          type="primary"
-          @click="handleSaveConfig"
-          :disabled="!isConfigValid || !isConfigModified"
-        >
+        <el-button type="primary" @click="handleSaveConfig" :disabled="!isConfigModified">
           保存
         </el-button>
       </div>

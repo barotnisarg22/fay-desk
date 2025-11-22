@@ -73,44 +73,59 @@ export function registerOpenAIHandlers(): void {
   // 保存配置
   ipcMain.handle('openai:saveConfig', async (_event, config: OpenAIConfig) => {
     try {
-      if (!openaiConfigService.isValid(config)) {
-        return { success: false, error: '配置无效：请提供 baseURL 和 apiKey' }
-      }
-
-      const validationResult = await openaiAPIService.validateApiKey(config)
-      if (!validationResult.valid) {
-        return { success: false, error: validationResult.error || 'API Key 验证失败' }
-      }
       const prevData = openaiConfigService.getModelsData()
       const prevBaseURL = prevData?.config?.baseURL
+      const baseURLChanged = prevBaseURL && prevBaseURL !== config.baseURL
+
       const success = openaiConfigService.save(config)
       if (!success) {
         return { success: false, error: '保存配置失败' }
       }
 
-      // 未切换代理地址时合并保留自定义模型
-      if (validationResult.models) {
-        let modelsToSave = validationResult.models
-        if (isVolcesService(config.baseURL)) {
-          modelsToSave = addVolcesModels(modelsToSave)
-        }
-        if (prevBaseURL && prevBaseURL === config.baseURL && prevData?.models) {
-          const customModels = prevData.models.filter((m) => m.isCustom)
-          if (customModels.length > 0) {
-            const apiIds = new Set(modelsToSave.map((m) => m.id))
-            const merged = [...modelsToSave]
-            for (const cm of customModels) {
-              if (!apiIds.has(cm.id)) merged.push(cm)
-            }
-            modelsToSave = merged
-          }
-        }
-        const modelsSuccess = openaiConfigService.saveModels(modelsToSave)
-        if (!modelsSuccess) {
-          console.warn('[OpenAI IPC] 模型列表保存失败，但配置已保存')
+      if (baseURLChanged) {
+        openaiConfigService.saveModels([])
+      }
+
+      if (!openaiConfigService.isValid(config)) {
+        return { success: true }
+      }
+
+      const validationResult = await openaiAPIService.validateApiKey(config)
+
+      if (!validationResult.valid) {
+        return {
+          success: true,
+          warning: validationResult.error || 'API Key 验证失败'
         }
       }
-      return { success: true, error: null }
+
+      if (!validationResult.models) {
+        return { success: true }
+      }
+
+      let modelsToSave = validationResult.models
+      if (isVolcesService(config.baseURL)) {
+        modelsToSave = addVolcesModels(modelsToSave)
+      }
+
+      if (!baseURLChanged && prevData?.models) {
+        const customModels = prevData.models.filter((m) => m.isCustom)
+        if (customModels.length > 0) {
+          const apiIds = new Set(modelsToSave.map((m) => m.id))
+          const merged = [...modelsToSave]
+          for (const cm of customModels) {
+            if (!apiIds.has(cm.id)) merged.push(cm)
+          }
+          modelsToSave = merged
+        }
+      }
+
+      const modelsSuccess = openaiConfigService.saveModels(modelsToSave)
+      if (!modelsSuccess) {
+        console.warn('[OpenAI IPC] 模型列表保存失败，但配置已保存')
+      }
+
+      return { success: true }
     } catch (error: any) {
       console.error('[OpenAI IPC] 保存配置失败:', error)
       return { success: false, error: error.message || '未知错误' }

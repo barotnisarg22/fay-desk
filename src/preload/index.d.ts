@@ -122,6 +122,7 @@ interface OpenAIModel {
 interface OpenAIResponse {
   success: boolean;
   error?: string;
+  warning?: string;
 }
 
 interface OpenAIConfigResponse extends OpenAIResponse {

@@ -50,12 +50,12 @@ const openTutorial = (): void => {
   }
 }
 
-const isConfigValid = computed(() => {
-  return config.value.baseURL.trim() !== '' && config.value.apiKey.trim() !== ''
-})
-
 const isConfigModified = computed(() => {
   return JSON.stringify(config.value) !== JSON.stringify(originalConfig.value)
+})
+
+const isConfigValid = computed(() => {
+  return config.value.baseURL.trim() !== '' && config.value.apiKey.trim() !== ''
 })
 
 const isSaving = ref(false)
@@ -123,15 +123,6 @@ const handleRefreshModels = async (): Promise<void> => {
 }
 
 const handleSaveConfig = async (): Promise<void> => {
-  if (!isConfigValid.value) {
-    ElNotification({
-      type: 'warning',
-      customClass: 'warn',
-      title: '请填写完整的配置信息'
-    })
-    return
-  }
-
   isSaving.value = true
 
   try {
@@ -143,6 +134,14 @@ const handleSaveConfig = async (): Promise<void> => {
     if (result.success) {
       originalConfig.value = JSON.parse(JSON.stringify(config.value))
       await handleLoadModels()
+
+      if (result.warning) {
+        ElNotification({
+          type: 'warning',
+          customClass: 'warn',
+          title: result.warning
+        })
+      }
     } else {
       ElNotification({
         type: 'error',
@@ -311,7 +310,7 @@ onMounted(async () => {
       <div class="actions">
         <el-button
           type="primary"
-          :disabled="!isConfigValid || !isConfigModified || isSaving"
+          :disabled="!isConfigModified || isSaving"
           :loading="isSaving"
           @click="handleSaveConfig"
         >
