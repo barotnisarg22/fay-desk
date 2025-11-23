@@ -29,7 +29,11 @@
       <div class="menu-item" @click="onPlayStopClick">
         <span>{{ isRunning ? '停止' : '播放' }}</span>
       </div>
-      <div class="menu-item danger-item" @click="onDeleteClick">
+      <div
+        class="menu-item danger-item"
+        :class="{ disabled: !isCustomWallpaper }"
+        @click="isCustomWallpaper && onDeleteClick()"
+      >
         <span>删除</span>
       </div>
     </div>
@@ -50,6 +54,11 @@ const wallpaperStore = useWallpaperStore()
 
 const isSelected = computed(() => wallpaperStore.isSelected(props.wallpaper.id))
 const isRunning = computed(() => wallpaperStore.isWallpaperRunning(props.wallpaper.id))
+
+const isCustomWallpaper = computed(() => {
+  const id = props.wallpaper.id
+  return /^\d{13}$/.test(id)
+})
 
 const imageLoading = ref(true)
 const imageError = ref(false)
@@ -291,8 +300,10 @@ onUnmounted(() => {
   font-size: 14px;
   color: #606266;
   transition: background-color 0.3s;
+  border-radius: 6px;
 
   &:hover {
+    color: var(--el-color-primary);
     background-color: #f5f7fa;
   }
 
@@ -306,15 +317,27 @@ onUnmounted(() => {
   }
 
   &.danger-item {
-    color: #f56c6c;
+    color: var(--el-color-danger);
 
     &:hover {
-      color: #f56c6c !important;
       background-color: #fef0f0 !important;
     }
 
     .el-icon {
-      color: #f56c6c;
+      color: var(--el-color-danger);
+    }
+
+    &.disabled {
+      color: var(--el-color-danger-light-7);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent !important;
+      }
+
+      .el-icon {
+        color: var(--el-color-danger-light-7);
+      }
     }
   }
 }
