@@ -118,7 +118,7 @@
       await new Promise((resolve, reject) => {
         const script = document.createElement('script')
         script.src =
-          'https://media.xingyun3d.com/xingyun3d/general/litesdk/xmovAvatar.0.1.0-alpha.63.js'
+          'https://media.xingyun3d.com/xingyun3d/general/litesdk/xmovAvatar.0.1.0-alpha.72.js'
         script.onload = resolve
         script.onerror = reject
         document.head.appendChild(script)
