@@ -128,6 +128,23 @@
         window.CryptoJSTest = window.CryptoJS
       }
 
+      // 注入自定义样式
+      const style = document.createElement('style')
+      style.textContent = `
+        /* 移除数字人的位置和变换样式，修复位置异常问题 */
+        #xmov-avatar > div canvas {
+          position: static !important;
+          transform: none !important;
+          left: 0 !important;
+          top: 0 !important;
+        }
+
+        #xmov-avatar > div #avatar-bg-container {
+          display: none !important;
+        }
+      `
+      document.head.appendChild(style)
+
       window.avatarAPI.hideLoading()
 
       return { success: true }
@@ -144,7 +161,6 @@
       container.innerHTML = ''
       const sdkContainer = document.createElement('div')
       sdkContainer.id = containerId
-      sdkContainer.style.width = '100%'
       sdkContainer.style.height = '100%'
       container.appendChild(sdkContainer)
       return { success: true }
