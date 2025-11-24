@@ -105,9 +105,57 @@
         transform: rotate(360deg);
       }
     }
+
+    #time-widget {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-family: "Microsoft YaHei", sans-serif;
+      color: #6b5b6e;
+      z-index: 10;
+      pointer-events: none;
+      user-select: none;
+      mix-blend-mode: multiply;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    #time-widget .time {
+      font-size: 120px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -2px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #time-widget .date {
+      font-size: 24px;
+      margin-top: 10px;
+      font-weight: 500;
+      opacity: 0.8;
+      letter-spacing: 2px;
+    }
+
+    #sakura {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+<canvas id="sakura"></canvas>
+
+<div id="time-widget">
+  <div class="time" id="clock-time">00:00</div>
+  <div class="date" id="clock-date">1月1日 星期一</div>
+</div>
+
 <!-- 数字人渲染容器 -->
 <div id="xmov-avatar"></div>
 
@@ -119,5 +167,150 @@
   <div class="status-spinner"></div>
   <span class="status-text"></span>
 </div>
+
+<script>
+  (function() {
+    const canvas = document.getElementById("sakura");
+    const ctx = canvas.getContext("2d");
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    window.addEventListener("resize", () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+
+    class Sakura {
+      constructor() {
+        this.reset(true);
+      }
+
+      reset(initial = false) {
+        if (initial) {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          if (this.x > width * 0.6 && this.y > height * 0.6) {
+            this.x = Math.random() * width * 0.5;
+            this.y = Math.random() * height * 0.5;
+          }
+        } else {
+          if (Math.random() > 0.5) {
+            this.x = Math.random() * width * 0.8;
+            this.y = -20;
+          } else {
+            this.x = -20;
+            this.y = Math.random() * height * 0.8;
+          }
+        }
+
+        this.size = Math.random() * 6 + 3;
+        const speed = Math.random() * 1 + 0.5;
+        this.vx = speed * 1.5 + Math.random() - 0.5;
+        this.vy = speed * 1 + Math.random() * 0.3;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.05;
+        this.opacity = Math.random() * 0.4 + 0.4;
+        this.type = Math.floor(Math.random() * 3);
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotationSpeed;
+        this.vx += (Math.random() - 0.5) * 0.02;
+        this.vy += (Math.random() - 0.5) * 0.02;
+        if (this.vx < 0.5) this.vx = 0.5;
+        if (this.vy < 0.5) this.vy = 0.5;
+        if (this.vx > 3) this.vx = 3;
+        if (this.vy > 3) this.vy = 3;
+        if (this.x > width + 20 || this.y > height + 20) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.globalAlpha = this.opacity;
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+        gradient.addColorStop(0, "rgba(255, 250, 250, 0.9)");
+        gradient.addColorStop(0.6, "#ffd7e6");
+        gradient.addColorStop(1, "#ffb7c5");
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        const s = this.size;
+        if (this.type === 0) {
+          ctx.moveTo(0, -s);
+          ctx.bezierCurveTo(-s * 0.6, -s * 0.6, -s * 1.2, 0, -s * 0.6, s * 0.8);
+          ctx.bezierCurveTo(-s * 0.2, s * 1.2, 0, s * 0.6, 0, s * 0.6);
+          ctx.bezierCurveTo(0, s * 0.6, s * 0.2, s * 1.2, s * 0.6, s * 0.8);
+          ctx.bezierCurveTo(s * 1.2, 0, s * 0.6, -s * 0.6, 0, -s);
+        } else if (this.type === 1) {
+          ctx.moveTo(0, -s);
+          ctx.quadraticCurveTo(-s * 0.9, -s * 0.1, -s * 0.3, s);
+          ctx.quadraticCurveTo(0, s * 0.8, s * 0.3, s);
+          ctx.quadraticCurveTo(s * 0.9, -s * 0.1, 0, -s);
+        } else {
+          ctx.moveTo(0, -s * 0.9);
+          ctx.bezierCurveTo(s * 0.7, -s * 0.3, s * 0.7, s * 0.3, 0, s * 0.9);
+          ctx.bezierCurveTo(-s * 0.7, s * 0.3, -s * 0.7, -s * 0.3, 0, -s * 0.9);
+        }
+
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const sakuras = [];
+    const SAKURA_COUNT = 60;
+
+    for (let i = 0; i < SAKURA_COUNT; i++) {
+      sakuras.push(new Sakura());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      sakuras.forEach(sakura => {
+        sakura.update();
+        sakura.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+
+  function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const timeHtml = `${hours}:${minutes}<span class="seconds">:${seconds}</span>`;
+
+    const days = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    const day = days[now.getDay()];
+    const dateStr = `${month}月${date}日 ${day}`;
+
+    const timeEl = document.getElementById("clock-time");
+    const dateEl = document.getElementById("clock-date");
+
+    if (timeEl) timeEl.innerHTML = timeHtml;
+    if (dateEl) dateEl.textContent = dateStr;
+  }
+
+  setInterval(updateTime, 1000);
+  window.addEventListener("DOMContentLoaded", updateTime);
+</script>
 </body>
 </html>
