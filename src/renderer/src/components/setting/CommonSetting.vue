@@ -7,6 +7,7 @@ const autoStartOnBoot = ref(true)
 const avatarEnabled = ref(true)
 const autoUpdate = ref(true)
 const loading = ref(false)
+const configLoaded = ref(false)
 
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -24,6 +25,7 @@ const loadConfig = async (): Promise<void> => {
     console.error('加载通用配置失败:', error)
   } finally {
     loading.value = false
+    configLoaded.value = true
   }
 }
 
@@ -98,6 +100,7 @@ onMounted(() => {
           <template #label> 开机自启动 </template>
           <div class="switch-container">
             <el-switch
+              v-if="configLoaded"
               :model-value="autoStartOnBoot"
               :disabled="loading"
               @update:model-value="onAutoStartOnBootChange"
@@ -113,6 +116,7 @@ onMounted(() => {
           </template>
           <div class="switch-container">
             <el-switch
+              v-if="configLoaded"
               :model-value="autoStartWallpaper"
               :disabled="loading"
               @update:model-value="onAutoStartWallpaperChange"
@@ -128,6 +132,7 @@ onMounted(() => {
           </template>
           <div class="switch-container">
             <el-switch
+              v-if="configLoaded"
               :model-value="autoUpdate"
               :disabled="loading"
               @update:model-value="onAutoUpdateChange"
